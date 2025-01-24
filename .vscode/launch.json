@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C++ Launch with OpenMP",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for lldb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build main with OpenMP and src dependencies",
+            "miDebuggerPath": "/opt/homebrew/opt/llvm/bin/lldb", 
+            "logging": {
+                "moduleLoad": false,
+                "programOutput": true,
+                "trace": true,
+                "traceResponse": true
+            }
+        }
+    ]
+}

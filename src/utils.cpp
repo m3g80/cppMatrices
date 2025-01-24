@@ -5,7 +5,7 @@
 
 // Prints the matrix to the console
 void printMatrix(const Matrix &M) {
-    for (const std::vector<int> &row : M.values) {
+    for (const std::vector<double> &row : M.values) {
         for (const int &val : row) {
             std::cout << val << " ";
         }
@@ -35,11 +35,11 @@ Matrix toRREF(Matrix &M) {
             }
             M.swapRows(j, swapRow);
         }
-        int lambda = M.values[j][i];
+        double lambda = M.values[j][i];
         M.divideRow(lambda, j);
         for (int k = 0; k < M.rows; k++) {
             if (k != j) {
-                int lambda2 = M.values[k][i];
+                double lambda2 = M.values[k][i];
                 M.addRow(-lambda2, j, k);
             }
         }

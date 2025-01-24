@@ -8,7 +8,7 @@
 using namespace std;
 
 // Constructors
-Matrix::Matrix(int rs, int cs, vector<vector<int>> &vals) : rows(rs), columns(cs) {
+Matrix::Matrix(int rs, int cs, vector<vector<double>> &vals) : rows(rs), columns(cs) {
     if (vals.size() != rs || rs < 0 || cs < 0 || (!vals.empty() && vals[0].size() != cs)) {
         throw invalid_argument("Dimensions of the provided values do not match the specified rows and columns.");
     } else {
@@ -16,7 +16,7 @@ Matrix::Matrix(int rs, int cs, vector<vector<int>> &vals) : rows(rs), columns(cs
     }
 }
 
-Matrix::Matrix(int rs, int cs) : rows(rs), columns(cs), values(vector<vector<int>>(rs, vector<int>(cs, 0))) {}
+Matrix::Matrix(int rs, int cs) : rows(rs), columns(cs), values(vector<vector<double>>(rs, vector<double>(cs, 0.0))) {}
 
 // Core Functions
 void Matrix::generateRandomValues() {
@@ -31,7 +31,7 @@ void Matrix::generateRandomValues() {
     }
 }
 
-Matrix Matrix::add(int lambda, const Matrix &M) {
+Matrix Matrix::add(double lambda, const Matrix &M) {
     if (M.columns != columns || M.rows != rows) {
         throw invalid_argument("Incorrect Dimensions");
     }
@@ -44,7 +44,7 @@ Matrix Matrix::add(int lambda, const Matrix &M) {
     return result;
 }
 
-Matrix Matrix::sMultiply(int lambda) {
+Matrix Matrix::sMultiply(double lambda) {
     Matrix result(rows, columns);
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
@@ -63,7 +63,7 @@ Matrix Matrix::multiply(const Matrix &M) {
 #pragma omp parallel for collapse(2)
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < M.columns; j++) {
-            int cij = 0;
+            double cij = 0;
             for (int k = 0; k < columns; k++) {
                 cij += values[i][k] * M.values[k][j];
             }
@@ -82,8 +82,8 @@ Matrix Matrix::transpose() {
     }
     return result;
 }
- tuple<vector<int>, char, int, int> Matrix::findLeast() {
- vector<vector<int>> transposed = transpose().values;
+ tuple<vector<double>, char, int, int> Matrix::findLeast() {
+ vector<vector<double>> transposed = transpose().values;
     int initialCount = count(transposed[0].begin(), transposed[0].end(), 0);
     auto least = make_tuple(transposed[0], 'c', 0, initialCount);
 

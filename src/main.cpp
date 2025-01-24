@@ -10,7 +10,7 @@ using namespace std::chrono;
 
 
 int main(){ 
-    vector<vector<int> > vals = {{-9, 21, 15, 10, 2}, 
+    vector<vector<double> > vals = {{-9, 21, 15, 10, 2}, 
                                  {4, 1, 2, 12, -424}, 
                                  {10, -34, 1, 11, 10}, 
                                  {1, 2, 3, 4, 5},
